@@ -1,0 +1,28 @@
+name: Build Dosyalarını cPanel'e Gönder
+
+on:
+  push:
+    branches:
+      - main  # Bu repoya her push/commit geldiğinde çalışır
+
+jobs:
+  deploy:
+    name: FTP Transfer
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Dosyaları Çek
+        uses: actions/checkout@v3
+
+      - name: 🚀 FTP ile cPanel'e Yükle
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Dosyalar reponun ana dizinindeyse '.' (nokta) bırakın
+          # Eğer bir klasörün içindeyse (örn: ./dist/) onu yazın
+          local-dir: ./client 
+          # cPanel'deki hedef klasör (genelde public_html)
+          server-dir: ./public_html/ 
+          # Sunucuda olup repoda olmayan eski dosyaları silmek isterseniz true yapın
+          delete-removed: false
