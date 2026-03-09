@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           # Dosyalar reponun ana dizinindeyse '.' (nokta) bırakın
           # Eğer bir klasörün içindeyse (örn: ./dist/) onu yazın
-          local-dir: ./client 
+          local-dir: ./client/ 
           # cPanel'deki hedef klasör (genelde public_html)
           server-dir: ./public_html/ 
           # Sunucuda olup repoda olmayan eski dosyaları silmek isterseniz true yapın
